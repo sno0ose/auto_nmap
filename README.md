@@ -4,7 +4,6 @@ THIS IS A WORK IN PROGRESS - SO NOT DONE YET!
 
 # Install 
 ================
-    [ # ] $ git clone git@38.97.236.241:bammerman/auto_nmap.git
     [ # ] $ cd auto_nmap
     [ # ] $ ./auto_nmap
 
