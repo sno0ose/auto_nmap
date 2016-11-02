@@ -88,15 +88,15 @@ def portScanAllPorts():
     print("###########################################################################################")
     print("                          PORT SCAN of target addresses with all TCP and UDP ports                                    ")
     print("###########################################################################################")
-    os.system('nmap -iL alive.ip -sTU -T4 -A -Pn -n -oA scans/portscanAll -v -p T:0-65536,U:0-65536 --min-hostgroup 256 --min-rate=2000')
+    os.system('nmap -iL alive.ip -sTU -T4 -A -Pn -n -oA scans/portscanAll -v -p T:0-65535,U:0-65535 --min-hostgroup 256 --min-rate=2000')
 
 def portScanAllTcpPorts():
     print("")
     print("")
     print("###########################################################################################")
-    print("                          PORT SCAN of target addresses with all TCP and UDP ports                                    ")
+    print("                          PORT SCAN of target addresses with all TCP ports                                    ")
     print("###########################################################################################")
-    os.system('nmap -iL alive.ip -sTU -T4 -A -Pn -n -oA scans/portscanAllTcp -v -p T:0-65536,U:53,69,123,161,500,1434 --min-hostgroup 256 --min-rate=2000')
+    os.system('nmap -iL alive.ip -sTU -T4 -A -Pn -n -oA scans/portscanAllTcp -v -p T:0-65535,U:53,69,123,161,500,1434 --min-hostgroup 256 --min-rate=2000')
 
 # simply parses the pingsweep.gnmap file and places any open ports into a text file with the respective IP address in it.
 def nmapScrape():
@@ -633,194 +633,194 @@ def main():
 #            exit()
 
 
-if (SCANTYPE==4):
-    try:
-        pingSweep()
-    except Exception as error:
-        print('The Ping Sweep failed to execute', error)
+    if (SCANTYPE==4):
+        try:
+            pingSweep()
+        except Exception as error:
+            print('The Ping Sweep failed to execute', error)
+            exit()
+
+        try:
+            portScanAllTcpPorts()
+        except Exception as error:
+            print('The Port Scan failed to execute', error)
+            exit()
+
+        try:
+            nmapScrapeAllTcpPorts()
+        except Exception as error:
+            print('The NmapScrap failed to execute', error)
+            exit()
+        try:
+            nmapParserAllTcpPorts()
+        except Exception as error:
+            print('The NMAP Parser failed to execute', error)
+            exit()
+
+    if (SCANTYPE==5):
+        try:
+            pingSweep()
+        except Exception as error:
+            print('The Ping Sweep failed to execute', error)
+            exit()
+
+        try:
+            portScanAllTcpPorts()
+        except Exception as error:
+            print('The Port Scan failed to execute', error)
+            exit()
+
+        try:
+            nmapScrapeAllTcpPorts()
+        except Exception as error:
+            print('The NmapScrap failed to execute', error)
+            exit()
+        try:
+            nmapParserAllTcpPorts()
+        except Exception as error:
+            print('The NMAP Parser failed to execute', error)
+            exit()
+
+        try:
+            snmpEnum()
+        except Exception as error:
+            print('The SNMP NSE Script failed', error)
+            exit()
+
+        try:
+            ftpEnum()
+        except Exception as error:
+            print('The FTP NSE Script failed to execute', error)
         exit()
 
-    try:
-        portScanAllTcpPorts()
-    except Exception as error:
-        print('The Port Scan failed to execute', error)
-        exit()
+        try:
+            httpEnum()
+        except Exception as error:
+            print('The HTTP NSE Script failed to execute', error)
+            exit()
 
-try:
-        nmapScrapeAllTcpPorts()
-    except Exception as error:
-        print('The NmapScrap failed to execute', error)
-        exit()
-    try:
-        nmapParserAllTcpPorts()
-    except Exception as error:
-        print('The NMAP Parser failed to execute', error)
-        exit()
+        try:
+            httpaltEnum()
+        except Exception as error:
+            print('The HTTP-ALT NSE Script failed to execute', error)
+            exit()
 
-if (SCANTYPE==5):
-    try:
-        pingSweep()
-    except Exception as error:
-        print('The Ping Sweep failed to execute', error)
-        exit()
+        try:
+            httpsEnum()
+        except Exception as error:
+            print('The HTTPS NSE Script failed to execute', error)
 
-    try:
-        portScanAllTcpPorts()
-    except Exception as error:
-        print('The Port Scan failed to execute', error)
-        exit()
+        try:
+            httpsaltEnum()
+        except Exception as error:
+            print('The HTTPs-ALT NSE Script failed to execute', error)
+            exit()
 
-    try:
-        nmapScrapeAllTcpPorts()
-    except Exception as error:
-        print('The NmapScrap failed to execute', error)
-        exit()
-    try:
-        nmapParserAllTcpPorts()
-    except Exception as error:
-        print('The NMAP Parser failed to execute', error)
-        exit()
+        try:
+            sslEnum()
+        except Exception as error:
+            print('The SSL NSE Script failed to execute', error)
+            exit()
 
-    try:
-        snmpEnum()
-    except Exception as error:
-        print('The SNMP NSE Script failed', error)
-        exit()
+        try:
+            dnsEnum()
+        except Exception as error:
+            print('The DNS NSE Script failed to execute', error)
+            exit()
 
-    try:
-        ftpEnum()
-    except Exception as error:
-        print('The FTP NSE Script failed to execute', error)
-        exit()
+        try:
+            smtpEnum()
+        except Exception as error:
+            print('The SMTP NSE Script failed to execute', error)
+            exit()
 
-    try:
-        httpEnum()
-    except Exception as error:
-        print('The HTTP NSE Script failed to execute', error)
-        exit()
+        try:
+            pop3Enum()
+        except Exception as error:
+            print('The POP3 NSE Script failed to execute', error)
+            exit()
 
-    try:
-        httpaltEnum()
-    except Exception as error:
-        print('The HTTP-ALT NSE Script failed to execute', error)
-        exit()
+        try:
+            telnetEnum()
+        except Exception as error:
+            print('The TELNET NSE Script failed to execute', error)
+            exit()
 
-    try:
-        httpsEnum()
-    except Exception as error:
-        print('The HTTPS NSE Script failed to execute', error)
+        try:
+            sshEnum()
+        except Exception as error:
+            print('The SSH NSE Script failed to execute', error)
+            exit()
 
-    try:
-        httpsaltEnum()
-    except Exception as error:
-        print('The HTTPs-ALT NSE Script failed to execute', error)
-        exit()
+        try:
+            smbEnum()
+        except Exception as error:
+            print('The SMB NSE Script failed to execute', error)
+            exit()
 
-try:
-        sslEnum()
-    except Exception as error:
-        print('The SSL NSE Script failed to execute', error)
-        exit()
+        try:
+            mysqlEnum()
+        except Exception as error:
+            print('The MYSQL NSE Script failed to execute', error)
 
-    try:
-        dnsEnum()
-    except Exception as error:
-        print('The DNS NSE Script failed to execute', error)
-        exit()
+        try:
+            mssqlEnum()
+        except Exception as error:
+            print('The MSSQL NSE Script failed to execute', error)
+            exit()
 
-    try:
-        smtpEnum()
-    except Exception as error:
-        print('The SMTP NSE Script failed to execute', error)
-        exit()
+        try:
+            mongodbEnum()
+        except Exception as error:
+            print('The Mongodb NSE Script failed to execute', error)
+            exit()
+        try:
+            vncEnum()
+        except Exception as error:
+            print('The VNC NSE Script failed to execute', error)
+            exit()
 
-    try:
-        pop3Enum()
-    except Exception as error:
-        print('The POP3 NSE Script failed to execute', error)
-        exit()
-
-    try:
-        telnetEnum()
-    except Exception as error:
-        print('The TELNET NSE Script failed to execute', error)
-        exit()
-
-    try:
-        sshEnum()
-    except Exception as error:
-        print('The SSH NSE Script failed to execute', error)
-        exit()
-
-    try:
-        smbEnum()
-    except Exception as error:
-        print('The SMB NSE Script failed to execute', error)
-        exit()
-
-    try:
-        mysqlEnum()
-    except Exception as error:
-        print('The MYSQL NSE Script failed to execute', error)
-
-    try:
-        mssqlEnum()
-    except Exception as error:
-        print('The MSSQL NSE Script failed to execute', error)
-        exit()
-
-    try:
-    mongodbEnum()
-except Exception as error:
-        print('The Mongodb NSE Script failed to execute', error)
-        exit()
-try:
-        vncEnum()
-    except Exception as error:
-        print('The VNC NSE Script failed to execute', error)
-        exit()
-
-    try:
-        oracleTnsEnum()
-    except Exception as error:
-        print('The Oracle TNS NSE Script failed to execute', error)
-        exit()
+        try:
+            oracleTnsEnum()
+        except Exception as error:
+            print('The Oracle TNS NSE Script failed to execute', error)
+            exit()
 
 
-    try:
-        ikeEnum()
-    except Exception as error:
-        print('The IKE NSE Script failed to execute', error)
+        try:
+            ikeEnum()
+        except Exception as error:
+            print('The IKE NSE Script failed to execute', error)
 
-    try:
-        ntpEnum()
-    except Exception as error:
-        print('The NTP NSE Script failed to execute', error)
-        exit()
+        try:
+            ntpEnum()
+        except Exception as error:
+            print('The NTP NSE Script failed to execute', error)
+            exit()
 
-    try:
-        nfsEnum()
-    except Exception as error:
-        print('The NFS NSE Script failed to execute', error)
-        exit()
+        try:
+            nfsEnum()
+        except Exception as error:
+            print('The NFS NSE Script failed to execute', error)
+            exit()
 
-try:
-        nfsEnum2()
-    except Exception as error:
-        print('The NFS NSE Script failed to execute', error)
-        exit()
+        try:
+            nfsEnum2()
+        except Exception as error:
+            print('The NFS NSE Script failed to execute', error)
+            exit()
 
-    try:
-        ms15034Enum()
-    except Exception as error:
-        print('The curl command failed to execute', error)
-        exit()
+        try:
+            ms15034Enum()
+        except Exception as error:
+            print('The curl command failed to execute', error)
+            exit()
 
-    try:
-        ms14066Enum()
-    except Exception as error:
-        print('The curl command failed to execute', error)
-        exit()
+        try:
+            ms14066Enum()
+        except Exception as error:
+            print('The curl command failed to execute', error)
+            exit()
 
 #	try:
 #            slowlorisEnum()
@@ -830,194 +830,194 @@ try:
 
 
 
-if (SCANTYPE==6):
-    try:
-        pingSweep()
-    except Exception as error:
-        print('The Ping Sweep failed to execute', error)
-        exit()
+    if (SCANTYPE==6):
+        try:
+            pingSweep()
+        except Exception as error:
+            print('The Ping Sweep failed to execute', error)
+            exit()
 
-    try:
-        portScanAllPorts()
-    except Exception as error:
-        print('The Port Scan failed to execute', error)
-        exit()
+        try:
+            portScanAllPorts()
+        except Exception as error:
+            print('The Port Scan failed to execute', error)
+            exit()
 
-try:
-        nmapScrapeAllPorts()
-    except Exception as error:
-        print('The NmapScrap failed to execute', error)
-        exit()
-    try:
-        nmapParserAllPorts()
-    except Exception as error:
-        print('The NMAP Parser failed to execute', error)
-        exit()
+        try:
+            nmapScrapeAllPorts()
+        except Exception as error:
+            print('The NmapScrap failed to execute', error)
+            exit()
+        try:
+            nmapParserAllPorts()
+        except Exception as error:
+            print('The NMAP Parser failed to execute', error)
+            exit()
 
-if (SCANTYPE==7):
-    try:
-        pingSweep()
-    except Exception as error:
-        print('The Ping Sweep failed to execute', error)
-        exit()
+    if (SCANTYPE==7):
+        try:
+            pingSweep()
+        except Exception as error:
+            print('The Ping Sweep failed to execute', error)
+            exit()
 
-    try:
-        portScanAllPorts()
-    except Exception as error:
-        print('The Port Scan failed to execute', error)
-        exit()
+        try:
+            portScanAllPorts()
+        except Exception as error:
+            print('The Port Scan failed to execute', error)
+            exit()
 
-    try:
-        nmapScrapeAllPorts()
-    except Exception as error:
-        print('The NmapScrap failed to execute', error)
-        exit()
-    try:
-        nmapParserAllPorts()
-    except Exception as error:
-        print('The NMAP Parser failed to execute', error)
-        exit()
+        try:
+            nmapScrapeAllPorts()
+        except Exception as error:
+            print('The NmapScrap failed to execute', error)
+            exit()
+        try:
+            nmapParserAllPorts()
+        except Exception as error:
+            print('The NMAP Parser failed to execute', error)
+            exit()
 
-    try:
-        snmpEnum()
-    except Exception as error:
-        print('The SNMP NSE Script failed', error)
-        exit()
+        try:
+            snmpEnum()
+        except Exception as error:
+            print('The SNMP NSE Script failed', error)
+            exit()
 
-    try:
-        ftpEnum()
-    except Exception as error:
-        print('The FTP NSE Script failed to execute', error)
-        exit()
+        try:
+            ftpEnum()
+        except Exception as error:
+            print('The FTP NSE Script failed to execute', error)
+            exit()
 
-    try:
-        httpEnum()
-    except Exception as error:
-        print('The HTTP NSE Script failed to execute', error)
-        exit()
+        try:
+            httpEnum()
+        except Exception as error:
+            print('The HTTP NSE Script failed to execute', error)
+            exit()
 
-    try:
-        httpaltEnum()
-    except Exception as error:
-        print('The HTTP-ALT NSE Script failed to execute', error)
-        exit()
+        try:
+            httpaltEnum()
+        except Exception as error:
+            print('The HTTP-ALT NSE Script failed to execute', error)
+            exit()
 
-    try:
-        httpsEnum()
-    except Exception as error:
-        print('The HTTPS NSE Script failed to execute', error)
+        try:
+            httpsEnum()
+        except Exception as error:
+            print('The HTTPS NSE Script failed to execute', error)
 
-    try:
-        httpsaltEnum()
-    except Exception as error:
-        print('The HTTPs-ALT NSE Script failed to execute', error)
-        exit()
+        try:
+            httpsaltEnum()
+        except Exception as error:
+            print('The HTTPs-ALT NSE Script failed to execute', error)
+            exit()
 
-try:
-        sslEnum()
-    except Exception as error:
-        print('The SSL NSE Script failed to execute', error)
-        exit()
+        try:
+            sslEnum()
+        except Exception as error:
+            print('The SSL NSE Script failed to execute', error)
+            exit()
 
-    try:
-        dnsEnum()
-    except Exception as error:
-        print('The DNS NSE Script failed to execute', error)
-        exit()
+        try:
+            dnsEnum()
+        except Exception as error:
+            print('The DNS NSE Script failed to execute', error)
+            exit()
 
-    try:
-        smtpEnum()
-    except Exception as error:
-        print('The SMTP NSE Script failed to execute', error)
-        exit()
+        try:
+            smtpEnum()
+        except Exception as error:
+            print('The SMTP NSE Script failed to execute', error)
+            exit()
 
-    try:
-        pop3Enum()
-    except Exception as error:
-        print('The POP3 NSE Script failed to execute', error)
-        exit()
+        try:
+            pop3Enum()
+        except Exception as error:
+            print('The POP3 NSE Script failed to execute', error)
+            exit()
 
-    try:
-        telnetEnum()
-    except Exception as error:
-        print('The TELNET NSE Script failed to execute', error)
-        exit()
+        try:
+            telnetEnum()
+        except Exception as error:
+            print('The TELNET NSE Script failed to execute', error)
+            exit()
 
-    try:
-        sshEnum()
-    except Exception as error:
-        print('The SSH NSE Script failed to execute', error)
-        exit()
+        try:
+            sshEnum()
+        except Exception as error:
+            print('The SSH NSE Script failed to execute', error)
+            exit()
 
-    try:
-        smbEnum()
-    except Exception as error:
-        print('The SMB NSE Script failed to execute', error)
-        exit()
+        try:
+            smbEnum()
+        except Exception as error:
+            print('The SMB NSE Script failed to execute', error)
+            exit()
 
-    try:
-        mysqlEnum()
-    except Exception as error:
-        print('The MYSQL NSE Script failed to execute', error)
+        try:
+            mysqlEnum()
+        except Exception as error:
+            print('The MYSQL NSE Script failed to execute', error)
 
-    try:
-        mssqlEnum()
-    except Exception as error:
-        print('The MSSQL NSE Script failed to execute', error)
-        exit()
+        try:
+            mssqlEnum()
+        except Exception as error:
+            print('The MSSQL NSE Script failed to execute', error)
+            exit()
 
-    try:
-    mongodbEnum()
-except Exception as error:
-        print('The Mongodb NSE Script failed to execute', error)
-        exit()
-try:
-        vncEnum()
-    except Exception as error:
-        print('The VNC NSE Script failed to execute', error)
-        exit()
+        try:
+            mongodbEnum()
+        except Exception as error:
+            print('The Mongodb NSE Script failed to execute', error)
+            exit()
+        try:
+            vncEnum()
+        except Exception as error:
+            print('The VNC NSE Script failed to execute', error)
+            exit()
 
-    try:
-        oracleTnsEnum()
-    except Exception as error:
-        print('The Oracle TNS NSE Script failed to execute', error)
-        exit()
+        try:
+            oracleTnsEnum()
+        except Exception as error:
+            print('The Oracle TNS NSE Script failed to execute', error)
+            exit()
 
 
-    try:
-        ikeEnum()
-    except Exception as error:
-        print('The IKE NSE Script failed to execute', error)
+        try:
+            ikeEnum()
+        except Exception as error:
+            print('The IKE NSE Script failed to execute', error)
 
-    try:
-        ntpEnum()
-    except Exception as error:
-        print('The NTP NSE Script failed to execute', error)
-        exit()
+        try:
+            ntpEnum()
+        except Exception as error:
+            print('The NTP NSE Script failed to execute', error)
+            exit()
 
-    try:
-        nfsEnum()
-    except Exception as error:
-        print('The NFS NSE Script failed to execute', error)
-        exit()
+        try:
+            nfsEnum()
+        except Exception as error:
+            print('The NFS NSE Script failed to execute', error)
+            exit()
 
-try:
-        nfsEnum2()
-    except Exception as error:
-        print('The NFS NSE Script failed to execute', error)
-        exit()
+        try:
+            nfsEnum2()
+        except Exception as error:
+            print('The NFS NSE Script failed to execute', error)
+            exit()
 
-    try:
-        ms15034Enum()
-    except Exception as error:
-        print('The curl command failed to execute', error)
-        exit()
+        try:
+            ms15034Enum()
+        except Exception as error:
+            print('The curl command failed to execute', error)
+            exit()
 
-    try:
-        ms14066Enum()
-    except Exception as error:
-        print('The curl command failed to execute', error)
-        exit()
+        try:
+            ms14066Enum()
+        except Exception as error:
+            print('The curl command failed to execute', error)
+            exit()
 
 #	try:
 #            slowlorisEnum()
