@@ -345,7 +345,7 @@ def oracleTnsEnum():
         print("            Running NSE script against ORACLE TNS           ")
         print("   Check the the oracletns file in the nse_scans directory  ")
         print("#"*61)
-        TNS='nmap --script=oracle-sid-brute -p 1521-1560 -iL open-ports/1521.txt -oN nse_scans/oracle --stats-every 60s --min-hostgroup 256 --min-rate=2000'
+        ORACLE='nmap --script=oracle-sid-brute -p 1521-1560 -iL open-ports/1521.txt -oN nse_scans/oracle --stats-every 60s --min-hostgroup 256 --min-rate=2000'
         os.system(ORACLE)
 
 #def slowlorisEnum():
