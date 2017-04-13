@@ -386,7 +386,10 @@ def ms14066Enum():
 # main
 def main():
 ############################################################ FUTURE FUNCTIONALITY TO BE ADDED ######################################################################################
-
+    if os.geteuid() != 0:
+        print("\t[!] you need root privileges to run this script.\n")
+        exit()
+        
     print("#"*151)
     print("#"*151)
     print("#"*151)
@@ -401,18 +404,24 @@ def main():
     print("#"*151)
     print("#"*151)
     print("#"*151)
-    SCANTYPE = input("You selected TCP Scan Type:")
+    SCANTYPE = raw_input("You selected TCP Scan Type:").strip()
 
 ############################################################ FUTURE FUNCTIONALITY TO BE ADDED ######################################################################################
+    try:
+        int(SCANTYPE)
+        pass
+    except ValueError:
+        print("\t[!]interger values only !\n")
+        main()
 
-    if (SCANTYPE==1):
+    if (int(SCANTYPE)==int(1)):
         try:
             pingSweep()
         except Exception as error:
             print('The Ping Sweep failed to execute', error)
             exit()
 
-    if (SCANTYPE==2):
+    elif (int(SCANTYPE)==int(2)):
         try:
             pingSweep()
         except Exception as error:
@@ -436,7 +445,7 @@ def main():
             print('The NMAP Parser failed to execute', error)
             exit()
 
-    if (SCANTYPE==3):
+    elif (int(SCANTYPE)==int(3)):
         try:
             pingSweep()
         except Exception as error:
@@ -565,7 +574,6 @@ def main():
             print('The Oracle TNS NSE Script failed to execute', error)
             exit()
 
-
         try:
             ikeEnum()
         except Exception as error:
@@ -607,8 +615,7 @@ def main():
 #            print('The Slowloris NSE Script failed to execute', error)
 #            exit()
 
-
-    if (SCANTYPE==4):
+    elif (int(SCANTYPE)==int(4)):
         try:
             pingSweep()
         except Exception as error:
@@ -632,7 +639,7 @@ def main():
             print('The NMAP Parser failed to execute', error)
             exit()
 
-    if (SCANTYPE==5):
+    elif (int(SCANTYPE)==int(5)):
         try:
             pingSweep()
         except Exception as error:
@@ -761,7 +768,6 @@ def main():
             print('The Oracle TNS NSE Script failed to execute', error)
             exit()
 
-
         try:
             ikeEnum()
         except Exception as error:
@@ -803,9 +809,7 @@ def main():
 #            print('The Slowloris NSE Script failed to execute', error)
 #            exit()
 
-
-
-    if (SCANTYPE==6):
+    elif (int(SCANTYPE)==int(6)):
         try:
             pingSweep()
         except Exception as error:
@@ -829,7 +833,7 @@ def main():
             print('The NMAP Parser failed to execute', error)
             exit()
 
-    if (SCANTYPE==7):
+    elif (int(SCANTYPE)==int(7)):
         try:
             pingSweep()
         except Exception as error:
@@ -958,7 +962,6 @@ def main():
             print('The Oracle TNS NSE Script failed to execute', error)
             exit()
 
-
         try:
             ikeEnum()
         except Exception as error:
@@ -994,6 +997,9 @@ def main():
             print('The curl command failed to execute', error)
             exit()
 
+    else:
+        print("\t[!]looks like you chose an option thats not avaliable yet\n")
+        main()
 #	try:
 #            slowlorisEnum()
 #        except Exception as error:
