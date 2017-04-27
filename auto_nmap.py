@@ -12,10 +12,6 @@
 ###############################################################################################################
 import shutil,os
 from core import scans
-###############################################################################################################
-# logic to see if the folders are already there, if they are delete folders and recreate empty directories
-#create new working folders for the scans, enumeration, NSE scans, and open ports\
-###############################################################################################################
 
 ###############################################################################################################
 #                                 Start of the NMAP pingsweep and portscanner
@@ -145,6 +141,11 @@ def ms14066Enum():
         f.close()
 
 def setup():
+###############################################################################################################
+# logic to see if the folders are already there, if they are delete folders and recreate empty directories
+#create new working folders for the scans, enumeration, NSE scans, and open ports\
+###############################################################################################################
+
     # can add a select yes to delete folders
     if os.path.exists('open-ports'):
         shutil.rmtree('open-ports') # Remove open-ports directory
