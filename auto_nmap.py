@@ -3,7 +3,7 @@
 ## [Title]: auto_nmap - automated nmap scanner and calls nse script scans - written in python3
 ## [Notes]: this file was based on a post at pentestgeek and some scripts by Alton Johnson
 ## [Author]: brad ammerman
-## [Contributor]: jthorp6
+## [Contributor]: jthorpe6
 ##-------------------------------------------------------------------------------------------------------------
 ## [Details]:
 ## This script will do a nmap discovery ping sweep, then find all open ports, print out a file in enumeration
@@ -67,7 +67,7 @@ def main():
     parser = scans.parser()
     nsescans = scans.nsescans()
     extra = scans.misc()
-############################################################ FUTURE FUNCTIONALITY TO BE ADDED ######################################################################################
+############################################################ FUTURE FUNCTIONALITY TO BE ADDED ################################################################
     if os.geteuid() != 0:
         print("\t[!] you need root privileges to run this script.\n")
         exit()
@@ -88,7 +88,7 @@ def main():
     print("#"*151)
     SCANTYPE = raw_input("You selected TCP Scan Type:").strip()
 
-############################################################ FUTURE FUNCTIONALITY TO BE ADDED ######################################################################################
+############################################################ FUTURE FUNCTIONALITY TO BE ADDED ###################################################################
     try:
         int(SCANTYPE)
         pass
