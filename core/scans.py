@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import os
+#import re
+#from prettytable import *
 
 class portscans():
     def pingSweep(self):
@@ -9,7 +11,7 @@ class portscans():
         print("\t\tCheck the file 'alive.ip' for all the alive hosts\t\t")
         print("#"*92)
     #    os.system('nmap -iL targets.ip -sP -PE -oA scans/PingSweep --excludefile exclude.ip -n --open')
-        os.system('nmap -sn -PE -iL targets.ip -PS3,7,9,13,17,19,21-23,25-26,37,53,79-82,88,100,106,110-111,113,119,135,139,143-144,179,199,254-255,280,311,389,427,443-445,464-465,497,513-515,543-544,548,554,587,593,625,631,636,646,787,808,873,902,990,993,995,1000,1022,1024-1033,1035-1041,1044,1048-1050,1053-1054,1056,1058-1059,1064-1066,1069,1071,1074,1080,1110,1234,1433,1494,1521,1720,1723,1755,1761,1801,1900,1935,1998,2000-2003,2005,2049,2103,2105,2107,2121,2161,2301,2383,2401,2601,2717,2869,2967,3000-3001,3128,3268,3306,3389,3689-3690,3703,3986,4000-4001,4045,4899,5000-5001,5003,5009,5050-5051,5060,5101,5120,5190,5357,5432,5555,5631,5666,5800,5900-5901,6000-6002,6004,6112,6646,6666,7000,7070,7937-7938,8000,8002,8008-8010,8031,8080-8081,8443,8888,9000-9001,9090,9100,9102,9999-10001,10010,32768,32771,49152-49157 -PU53,67-69,111,123,135,137-139,161-162,445,500,514,520,631,996-999,1434,1701,1900,3283,4500,5353,49152-49154 -oA scans/PingSweep --excludefile exclude.ip --min-hostgroup 256 --min-rate=2000 --open')
+        os.system('nmap --open -sn -PE -iL targets.ip -PS3,7,9,13,17,19,21-23,25-26,37,53,79-82,88,100,106,110-111,113,119,135,139,143-144,179,199,254-255,280,311,389,427,443-445,464-465,497,513-515,543-544,548,554,587,593,625,631,636,646,787,808,873,902,990,993,995,1000,1022,1024-1033,1035-1041,1044,1048-1050,1053-1054,1056,1058-1059,1064-1066,1069,1071,1074,1080,1110,1234,1433,1494,1521,1720,1723,1755,1761,1801,1900,1935,1998,2000-2003,2005,2049,2103,2105,2107,2121,2161,2301,2383,2401,2601,2717,2869,2967,3000-3001,3128,3268,3306,3389,3689-3690,3703,3986,4000-4001,4045,4899,5000-5001,5003,5009,5050-5051,5060,5101,5120,5190,5357,5432,5555,5631,5666,5800,5900-5901,6000-6002,6004,6112,6646,6666,7000,7070,7937-7938,8000,8002,8008-8010,8031,8080-8081,8443,8888,9000-9001,9090,9100,9102,9999-10001,10010,32768,32771,49152-49157 -PU53,67-69,111,123,135,137-139,161-162,445,500,514,520,631,996-999,1434,1701,1900,3283,4500,5353,49152-49154 -oA scans/PingSweep --excludefile exclude.ip --min-hostgroup 256 --min-rate=2000 ')
     #    os.system('cat scans/PingSweep.gnmap | awk \'/Up/{print $2}\' >> alive.ip')
         os.system('grep "Up" scans/PingSweep.gnmap | cut -d " " -f2 |sort -u > alive.ip')
     
@@ -17,19 +19,19 @@ class portscans():
         print("#"*92)
         print("\t\tPORT SCAN of target addresses\t\t")
         print("#"*92)
-        os.system('nmap -iL alive.ip -sTU -T4 -A -Pn -n -oA scans/portscan -v -p T:3,7,9,13,17,19,21-23,25-26,37,53,79-82,88,100,106,110-111,113,119,135,139,143-144,179,199,254-255,280,311,389,427,443-445,464-465,497,513-515,543-544,548,554,587,593,625,631,636,646,787,808,873,902,990,993,995,1000,1022,1024-1033,1035-1041,1044,1048-1050,1053-1054,1056,1058-1059,1064-1066,1069,1071,1074,1080,1110,1234,1433,1494,1521,1720,1723,1755,1761,1801,1900,1935,1998,2000-2003,2005,2049,2103,2105,2107,2121,2161,2301,2383,2401,2601,2717,2869,2967,3000-3001,3128,3268,3306,3389,3689-3690,3703,3986,4000-4001,4045,4899,5000,5003,5009,5050-5051,5060,5101,5120,5190,5357,5432,5555,5631,5666,5800,5900-5901,6000-6002,6004,6112,6646,6666,7000,7070,7937-7938,8000,8002,8008-8010,8031,8080-8081,8443,8888,9000-9001,9090,9100,9102,9999-10001,10010,32768,32771,49152-49157,U:53,69,123,161,500,1434 --min-hostgroup 256 --min-rate=2000')
+        os.system('nmap --open -iL alive.ip -sTU -T4 -A -Pn -n -oA scans/portscan -v -p T:3,7,9,13,17,19,21-23,25-26,37,53,79-82,88,100,106,110-111,113,119,135,139,143-144,179,199,254-255,280,311,389,427,443-445,464-465,497,513-515,543-544,548,554,587,593,625,631,636,646,787,808,873,902,990,993,995,1000,1022,1024-1033,1035-1041,1044,1048-1050,1053-1054,1056,1058-1059,1064-1066,1069,1071,1074,1080,1110,1234,1433,1494,1521,1720,1723,1755,1761,1801,1900,1935,1998,2000-2003,2005,2049,2103,2105,2107,2121,2161,2301,2383,2401,2601,2717,2869,2967,3000-3001,3128,3268,3306,3389,3689-3690,3703,3986,4000-4001,4045,4899,5000,5003,5009,5050-5051,5060,5101,5120,5190,5357,5432,5555,5631,5666,5800,5900-5901,6000-6002,6004,6112,6646,6666,7000,7070,7937-7938,8000,8002,8008-8010,8031,8080-8081,8443,8888,9000-9001,9090,9100,9102,9999-10001,10010,32768,32771,49152-49157,U:53,69,123,161,500,1434 --min-hostgroup 256 --min-rate=2000')
     
     def portScanAllPorts(self):
         print("#"*92)
         print("\t\tPORT SCAN of target addresses with all TCP and UDP ports\t\t")
         print("#"*92)
-        os.system('nmap -iL alive.ip -sTU -T4 -A -Pn -n -oA scans/portscanAll -v -p T:0-65535,U:0-65535 --min-hostgroup 256 --min-rate=2000')
+        os.system('nmap --open -iL alive.ip -sTU -T4 -A -Pn -n -oA scans/portscanAll -v -p T:0-65535,U:0-65535 --min-hostgroup 256 --min-rate=2000')
     
     def portScanAllTcpPorts(self):
         print("#"*92)
         print("\t\tPORT SCAN of target addresses with all TCP ports\t\t")
         print("#"*92)
-        os.system('nmap -iL alive.ip -sTU -T4 -A -Pn -n -oA scans/portscanAllTcp -v -p T:0-65535,U:53,69,123,161,500,1434 --min-hostgroup 256 --min-rate=2000')
+        os.system('nmap --open -iL alive.ip -sTU -T4 -A -Pn -n -oA scans/portscanAllTcp -v -p T:0-65535,U:53,69,123,161,500,1434 --min-hostgroup 256 --min-rate=2000')
 
 class parser():
     # simply parses the pingsweep.gnmap file and places any open ports into a text file with the respective IP address in it.
@@ -73,6 +75,42 @@ class parser():
         print("\t\tCheck the file 'nmapreport' in the enumeration folder\t\t")
         print("#"*92)
         os.system('./nmap_parser.py scans/portscanAllTcp.gnmap > enumeration/nmapreport.txt')
+
+# replace above with the following
+#    def prettyTable(self, file):
+#        target_file = open(file)
+#        targett_file = target_file.read().split('\n')
+#    
+#        table = PrettyTable(["IP Address","Port","Service","Version"])
+#        data = []
+#    
+#        for item in targett_file:
+#            ip_addr = item[item.find(":")+2:item.find("(")-1]
+#            info = re.findall("(?<=Ports: )(.*?)(?=Ignored)", item)
+#            if len(info) == 0:
+#                info = re.findall("(?<=Ports: )(.*?)(?=Seq Index)", item)
+#            if len(info) == 0:
+#                info = re.findall("(?<=Ports: )(.*?)(?=$)", item)
+#            if len(info) != 0:
+#                for i in info:
+#                    result = i.split(',')
+#                    for x in result:
+#                        port = re.findall("([0-9]+/open/.*?)/", x)
+#                        if "[]" in str(port):
+#                            continue
+#                        port = port[0].replace("/open", "")
+#                        service = re.findall("(?<=//)(.*?)(?=/)", x)[0]
+#                        version = x.split("/")[-2]
+#                        if len(version) > 40:
+#                            version = version[:40]
+#                        if len(version) == 0:
+#                            version = "-"
+#                        table.add_row([ip_addr, port, service, version])
+#        pretty_table = open('table.txt', 'w')
+#        pretty_table_str = str(table)
+#        pretty_table.write(pretty_table_str)
+#        pretty_table.close()
+#        print table
 
 class nsescans():
     def snmpEnum(self):
